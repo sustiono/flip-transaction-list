@@ -1,0 +1,124 @@
+* {
+  font-size: 14px;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  background-color: #f3f7f9;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+
+  .transaction-container {
+    display: flex;
+    flex-direction: column;
+    .header {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      p.title {
+        font-size: 3rem;
+        font-weight: 300;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .greating {
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
+      .info .price {
+        color: #fd6542;
+      }
+    }
+    .filter {
+      height: 45px;
+      display: flex;
+      flex-wrap: wrap;
+      // justify-content: space-between;
+      // align-items: center;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+      .search {
+        flex-basis: 0;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        max-width: 100%;
+        border-right: 1px solid #ddd;
+        .icon-search {
+          color: #ddd;
+          float: left;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          margin: 0 30px 0 20px;
+        }
+        .input-search {
+          height: 100%;
+          display: grid;
+          place-items: center;
+          input {
+            height: 100%;
+            width: 100%;
+            border: none;
+            background-color: transparent;
+            &:focus-visible {
+              outline: none;
+            }
+            &::-webkit-input-placeholder {
+              /* Edge */
+              color: #afafaf;
+            }
+            &:-ms-input-placeholder {
+              /* Internet Explorer 10-11 */
+              color: #afafaf;
+            }
+            &::placeholder {
+              color: #afafaf;
+            }
+          }
+        }
+      }
+      .sort {
+        margin: 0 20px;
+        select {
+          height: 100%;
+          border: none;
+          &:focus-visible {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+//------------------------- Breakpoints Responsive Page -------------------------
+@media (min-width: 576px) {
+  #root {
+    max-width: 85%;
+  }
+}
+
+@media (min-width: 768px) {
+  #root {
+    max-width: 75%;
+  }
+}
+
+@media (min-width: 992px) {
+  #root {
+    max-width: 50%;
+  }
+}
