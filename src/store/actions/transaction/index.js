@@ -10,7 +10,7 @@ const getTransactions = () => {
   return async (dispacth, getState) => {
     try {
       axios
-        .get("https://nextar.flip.id/frontend-test")
+        .get(`${process.env.REACT_APP_API_HOST}/frontend-test`)
         .then(function (response) {
           // handle success
           let data = Object.values(response.data);
