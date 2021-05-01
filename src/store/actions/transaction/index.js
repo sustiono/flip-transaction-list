@@ -9,14 +9,15 @@ const getTransactions = () => {
         .get("https://nextar.flip.id/frontend-test")
         .then(function (response) {
           // handle success
+          let data = Object.values(response.data);
           batch(() => {
             dispacth({
+              data,
               type: actionTypes.SET_TRANSACTIONS,
-              data: Object.values(response.data),
             });
             dispacth({
+              filteredData: data,
               type: actionTypes.SET_FILTERED_TRANSACTIONS,
-              filteredData: Object.values(response.data),
             });
           });
         })
@@ -49,4 +50,36 @@ const searchTransaction = (term) => {
   };
 };
 
-export { getTransactions, searchTransaction };
+const sortTransaction = (sortType) => {
+  return async (dispacth, getState) => {
+    const { data } = getState().transactions;
+    let filteredData;
+    if (sortType === "name-asc") {
+      filteredData = data.sort((a, b) =>
+        a.beneficiary_name.localeCompare(b.beneficiary_name)
+      );
+    } else if (sortType === "name-desc") {
+      filteredData = data.sort((a, b) =>
+        b.beneficiary_name.localeCompare(a.beneficiary_name)
+      );
+    } else if (sortType === "date-asc") {
+      filteredData = data.sort((a, b) => {
+        const x = new Date(a.completed_at);
+        const y = new Date(b.completed_at);
+        return x - y;
+      });
+    } else if (sortType === "date-desc") {
+      filteredData = data.sort((a, b) => {
+        const x = new Date(a.completed_at);
+        const y = new Date(b.completed_at);
+        return y - x;
+      });
+    }
+    dispacth({
+      filteredData,
+      type: actionTypes.SET_FILTERED_TRANSACTIONS,
+    });
+  };
+};
+
+export { getTransactions, searchTransaction, sortTransaction };

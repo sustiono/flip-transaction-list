@@ -7,6 +7,7 @@ import Transaction from "../../components/Transaction";
 import {
   getTransactions,
   searchTransaction,
+  sortTransaction,
 } from "../../store/actions/transaction";
 import { idrFormatter } from "../../utils";
 
@@ -52,7 +53,13 @@ const Transactions = () => {
           </div>
         </div>
         <div className='sort'>
-          <select>
+          <select
+            defaultValue=''
+            onChange={(e) => dispatch(sortTransaction(e.target.value))}
+          >
+            <option value='' disabled>
+              Urutkan
+            </option>
             <option value='name-asc'>Nama A-Z</option>
             <option value='name-desc'>Nama Z-A</option>
             <option value='date-asc'>Tanggal terbaru</option>
