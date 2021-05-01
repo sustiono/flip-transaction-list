@@ -5,6 +5,8 @@ let initialState = {
   data: [],
   filteredData: [],
   submiting: true,
+  term: "",
+  sortType: "",
 };
 const transactions = (state = initialState, action) => {
   switch (action.type) {
@@ -15,7 +17,13 @@ const transactions = (state = initialState, action) => {
       newState = { ...state, filteredData: action.filteredData };
       return newState;
     case actionTypes.SET_SUBMITING:
-      newState = { ...state, submiting: !state.submiting };
+      newState = { ...state, submiting: action.submiting };
+      return newState;
+    case actionTypes.SET_TERM:
+      newState = { ...state, term: action.term };
+      return newState;
+    case actionTypes.SET_SORT_TYPE:
+      newState = { ...state, sortType: action.sortType };
       return newState;
     default:
       return state;

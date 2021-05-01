@@ -14,7 +14,7 @@ const TransactionDetail = () => {
   const trxStatus = transaction?.status?.toLowerCase();
 
   const goBack = () => {
-    dispatch(setSubmiting());
+    dispatch(setSubmiting(true));
     history.push("/");
   };
 

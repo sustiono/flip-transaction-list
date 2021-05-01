@@ -7,16 +7,20 @@ import Transaction from "../../components/Transaction";
 
 import {
   getTransactions,
-  searchTransaction,
-  sortTransaction,
+  setTerm,
+  setSortType,
 } from "../../store/actions/transaction";
 import { idrFormatter } from "../../utils";
 
 const Transactions = () => {
   const dispatch = useDispatch();
-  const { data, filteredData: transactions, submiting } = useSelector(
-    (state) => state.transactions
-  );
+  const {
+    data,
+    filteredData: transactions,
+    submiting,
+    term,
+    sortType,
+  } = useSelector((state) => state.transactions);
   const totalTransaction = data
     .map((trx) => trx.amount)
     .reduce((a, b) => a + b, 0);
@@ -58,15 +62,16 @@ const Transactions = () => {
               <div className='input-search'>
                 <input
                   type='text'
+                  value={term}
                   placeholder='Cari nama atau bank'
-                  onChange={(e) => dispatch(searchTransaction(e.target.value))}
+                  onChange={(e) => dispatch(setTerm(e.target.value))}
                 />
               </div>
             </div>
             <div className='sort'>
               <select
-                defaultValue=''
-                onChange={(e) => dispatch(sortTransaction(e.target.value))}
+                value={sortType}
+                onChange={(e) => dispatch(setSortType(e.target.value))}
               >
                 <option value='' disabled>
                   Urutkan
