@@ -2,6 +2,10 @@ import { batch } from "react-redux";
 import axios from "axios";
 import { actionTypes } from "../../constantas";
 
+const setSubmiting = () => {
+  return { type: actionTypes.SET_SUBMITING };
+};
+
 const getTransactions = () => {
   return async (dispacth, getState) => {
     try {
@@ -19,16 +23,16 @@ const getTransactions = () => {
               filteredData: data,
               type: actionTypes.SET_FILTERED_TRANSACTIONS,
             });
-            dispacth({ type: actionTypes.SET_SUBMITING });
+            dispacth(setSubmiting());
           });
         })
         .catch(function (error) {
           // handle error
-          dispacth({ type: actionTypes.SET_SUBMITING });
+          dispacth(setSubmiting());
           console.log("error: ", error);
         });
     } catch (error) {
-      dispacth({ type: actionTypes.SET_SUBMITING });
+      dispacth(setSubmiting());
       console.log("error: ", error);
     }
   };
@@ -85,4 +89,4 @@ const sortTransaction = (sortType) => {
   };
 };
 
-export { getTransactions, searchTransaction, sortTransaction };
+export { getTransactions, searchTransaction, sortTransaction, setSubmiting };

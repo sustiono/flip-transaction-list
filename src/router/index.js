@@ -1,11 +1,12 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { Router, Switch, Route, Link } from "react-router-dom";
+import history from "./history";
 
 import { Transactions, TransactionDetail } from "../pages";
 
 const Routes = () => {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route exact path='/'>
           <Transactions />
@@ -22,7 +23,7 @@ const Routes = () => {
           </div>
         </Route>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 

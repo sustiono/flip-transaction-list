@@ -1,12 +1,17 @@
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { GoPrimitiveDot } from "react-icons/go";
+
+import history from "../../router/history";
 import { bankNameFormatter, idrFormatter, dateFormatter } from "../../utils";
 
 const Transaction = ({ transaction }) => {
   const trxStatus = transaction.status.toLowerCase();
 
   return (
-    <div className={`transaction-card ${trxStatus}`}>
+    <div
+      className={`transaction-card ${trxStatus}`}
+      onClick={() => history.push(`/transaksi/${transaction.id}`)}
+    >
       <div>
         <div className='bank'>
           {`${bankNameFormatter(transaction.sender_bank)}`}
@@ -23,9 +28,9 @@ const Transaction = ({ transaction }) => {
         </div>
       </div>
       <div>
-        <button className={trxStatus}>
+        <span className={`status ${trxStatus}`}>
           {trxStatus === "success" ? "Berhasil" : "Pengecekan"}
-        </button>
+        </span>
       </div>
     </div>
   );
