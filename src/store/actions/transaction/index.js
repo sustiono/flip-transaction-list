@@ -28,19 +28,27 @@ const getTransactions = () => {
   return async (dispacth, getState) => {
     try {
       dispacth(setSubmiting(true));
+      const { term, sortType } = getState().transactions;
 
       axios
         .get(`${process.env.REACT_APP_API_HOST}/frontend-test`)
         .then(function (response) {
           // handle success
-          let data = Object.values(response.data);
+          const data = Object.values(response.data);
+          let filteredData = [...data];
+          if (!!term) {
+            filteredData = searching(filteredData, term);
+          }
+          if (!!sortType) {
+            filteredData = sorting(filteredData, sortType);
+          }
           batch(() => {
             dispacth({
               data,
               type: actionTypes.SET_TRANSACTIONS,
             });
             dispacth({
-              filteredData: data,
+              filteredData,
               type: actionTypes.SET_FILTERED_TRANSACTIONS,
             });
             dispacth(setSubmiting(false));
