@@ -4,13 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Transaction from "../../components/Transaction";
 
-import { getTransactions } from "../../store/actions/transaction";
+import {
+  getTransactions,
+  searchTransaction,
+} from "../../store/actions/transaction";
 import { idrFormatter } from "../../utils";
 
 const Transactions = () => {
   const dispatch = useDispatch();
-  const { data: transactions } = useSelector((state) => state.transactions);
-  const totalTransaction = transactions
+  const { data, filteredData: transactions } = useSelector(
+    (state) => state.transactions
+  );
+  const totalTransaction = data
     .map((trx) => trx.amount)
     .reduce((a, b) => a + b, 0);
 
@@ -39,7 +44,11 @@ const Transactions = () => {
             <FaSearch />
           </div>
           <div className='input-search'>
-            <input type='text' placeholder='Cari nama atau bank' />
+            <input
+              type='text'
+              placeholder='Cari nama atau bank'
+              onChange={(e) => dispatch(searchTransaction(e.target.value))}
+            />
           </div>
         </div>
         <div className='sort'>

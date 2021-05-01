@@ -1,5 +1,6 @@
 const actionTypes = {
   SET_TRANSACTIONS: "SET_TRANSACTIONS",
+  SET_FILTERED_TRANSACTIONS: "SET_FILTERED_TRANSACTIONS",
 };
 
 export { actionTypes };
