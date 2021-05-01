@@ -19,13 +19,16 @@ const getTransactions = () => {
               filteredData: data,
               type: actionTypes.SET_FILTERED_TRANSACTIONS,
             });
+            dispacth({ type: actionTypes.SET_SUBMITING });
           });
         })
         .catch(function (error) {
           // handle error
+          dispacth({ type: actionTypes.SET_SUBMITING });
           console.log("error: ", error);
         });
     } catch (error) {
+      dispacth({ type: actionTypes.SET_SUBMITING });
       console.log("error: ", error);
     }
   };

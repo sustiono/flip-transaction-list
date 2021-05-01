@@ -4,6 +4,7 @@ let newState;
 let initialState = {
   data: [],
   filteredData: [],
+  submiting: true,
 };
 const transactions = (state = initialState, action) => {
   switch (action.type) {
@@ -12,6 +13,9 @@ const transactions = (state = initialState, action) => {
       return newState;
     case actionTypes.SET_FILTERED_TRANSACTIONS:
       newState = { ...state, filteredData: action.filteredData };
+      return newState;
+    case actionTypes.SET_SUBMITING:
+      newState = { ...state, submiting: !state.submiting };
       return newState;
     default:
       return state;
