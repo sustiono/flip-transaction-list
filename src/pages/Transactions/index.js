@@ -1,5 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 
+import Transaction from "../../components/Transaction";
+
 const Transactions = () => {
   return (
     <div className='transaction-container'>
@@ -22,7 +24,7 @@ const Transactions = () => {
           </div>
         </div>
         <div className='sort'>
-          <select name='cars' id='cars'>
+          <select>
             <option value='name-asc'>Nama A-Z</option>
             <option value='name-desc'>Nama Z-A</option>
             <option value='date-asc'>Tanggal terbaru</option>
@@ -30,6 +32,17 @@ const Transactions = () => {
           </select>
         </div>
       </div>
+
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
     </div>
   );
 };
