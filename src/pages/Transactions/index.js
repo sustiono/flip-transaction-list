@@ -1,8 +1,22 @@
+import { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getTransactions } from "../../store/actions/transaction";
 
 import Transaction from "../../components/Transaction";
 
 const Transactions = () => {
+  const dispatch = useDispatch();
+  const { data: transactions } = useSelector((state) => state.transactions);
+
+  useEffect(() => {
+    dispatch(getTransactions());
+    return () => {
+      return;
+    };
+  }, []);
+
   return (
     <div className='transaction-container'>
       <div className='header'>
@@ -33,16 +47,9 @@ const Transactions = () => {
         </div>
       </div>
 
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
-      <Transaction />
+      {transactions.map((transaction) => (
+        <Transaction key={transaction.id} transaction={transaction} />
+      ))}
     </div>
   );
 };
