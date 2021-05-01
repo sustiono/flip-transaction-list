@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import BeatLoader from "react-spinners/BeatLoader";
+import { FaSearch } from "react-icons/fa";
 
 import Transaction from "../../components/Transaction";
 

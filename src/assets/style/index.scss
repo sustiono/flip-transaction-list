@@ -140,12 +140,22 @@ body {
       }
 
       .bank {
+        display: flex;
+        align-items: center;
         color: #333;
         font-weight: bolder;
+        svg {
+          font-size: 1.2rem;
+        }
       }
 
       .receiver {
         margin: 3px 0;
+      }
+
+      .nominal {
+        display: flex;
+        align-items: center;
       }
     }
   }

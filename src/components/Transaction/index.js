@@ -1,3 +1,5 @@
+import { HiArrowNarrowRight } from "react-icons/hi";
+import { GoPrimitiveDot } from "react-icons/go";
 import { bankNameFormatter, idrFormatter, dateFormatter } from "../../utils";
 
 const Transaction = ({ transaction }) => {
@@ -7,17 +9,17 @@ const Transaction = ({ transaction }) => {
     <div className={`transaction-card ${trxStatus}`}>
       <div>
         <div className='bank'>
-          {`${bankNameFormatter(
-            transaction.sender_bank
-          )} -> ${bankNameFormatter(transaction.beneficiary_bank)}`}
+          {`${bankNameFormatter(transaction.sender_bank)}`}
+          <HiArrowNarrowRight />
+          {`${bankNameFormatter(transaction.beneficiary_bank)}`}
         </div>
         <div className='receiver'>
           {transaction.beneficiary_name.toUpperCase()}
         </div>
         <div className='nominal'>
-          {`${idrFormatter(transaction.amount)} ${dateFormatter(
-            transaction.completed_at
-          )}`}
+          {`${idrFormatter(transaction.amount)}`}
+          <GoPrimitiveDot />
+          {`${dateFormatter(transaction.completed_at)}`}
         </div>
       </div>
       <div>
