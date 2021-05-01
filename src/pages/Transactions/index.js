@@ -2,13 +2,17 @@ import { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getTransactions } from "../../store/actions/transaction";
-
 import Transaction from "../../components/Transaction";
+
+import { getTransactions } from "../../store/actions/transaction";
+import { idrFormatter } from "../../utils";
 
 const Transactions = () => {
   const dispatch = useDispatch();
   const { data: transactions } = useSelector((state) => state.transactions);
+  const totalTransaction = transactions
+    .map((trx) => trx.amount)
+    .reduce((a, b) => a + b, 0);
 
   useEffect(() => {
     dispatch(getTransactions());
@@ -24,7 +28,8 @@ const Transactions = () => {
         <div className='greating'>Halo Kak!</div>
         <div className='info'>
           Kamu telah melakukan transaksi sebesar{" "}
-          <span className='price'>Rp5.000.000</span> sejak menggunakan Flip.
+          <span className='price'>{idrFormatter(totalTransaction)}</span> sejak
+          menggunakan Flip.
         </div>
       </div>
 
