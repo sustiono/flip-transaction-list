@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BeatLoader from "react-spinners/BeatLoader";
 import { FaSearch } from "react-icons/fa";
+import { MdExpandMore } from "react-icons/md";
 
 import Transaction from "../../components/Transaction";
 
@@ -12,14 +13,22 @@ import {
 } from "../../store/actions/transaction";
 import { idrFormatter } from "../../utils";
 
+const sortLists = [
+  { label: "Nama A-Z", value: "name-asc" },
+  { label: "Nama Z-A", value: "name-desc" },
+  { label: "Tanggal terbaru", value: "date-asc" },
+  { label: "Tanggal Terlama", value: "date-desc" },
+];
+
 const Transactions = () => {
   const dispatch = useDispatch();
+  const [showDropdown, setShowDropdown] = useState(false);
   const {
     data,
-    filteredData: transactions,
-    submiting,
     term,
     sortType,
+    submiting,
+    filteredData: transactions,
   } = useSelector((state) => state.transactions);
   const totalTransaction = data
     .map((trx) => trx.amount)
@@ -68,19 +77,32 @@ const Transactions = () => {
                 />
               </div>
             </div>
-            <div className='sort'>
-              <select
-                value={sortType}
-                onChange={(e) => dispatch(setSortType(e.target.value))}
+            <div className='sort-container'>
+              <div
+                className='sort'
+                onClick={() => setShowDropdown(!showDropdown)}
               >
-                <option value='' disabled>
-                  Urutkan
-                </option>
-                <option value='name-asc'>Nama A-Z</option>
-                <option value='name-desc'>Nama Z-A</option>
-                <option value='date-asc'>Tanggal terbaru</option>
-                <option value='date-desc'>Tanggal Terlama</option>
-              </select>
+                <div className='selection'>
+                  {sortLists.find((l) => l.value === sortType)?.label ||
+                    "Urutkan"}
+                </div>
+                <div className='expand-icon'>
+                  <MdExpandMore />
+                </div>
+              </div>
+              <ul className={`selection-list ${showDropdown ? "" : "hidden"}`}>
+                {sortLists.map((list) => (
+                  <li
+                    key={list.value}
+                    onClick={() => {
+                      setShowDropdown(false);
+                      dispatch(setSortType(list.value));
+                    }}
+                  >
+                    {list.label}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 

@@ -124,14 +124,46 @@ body {
           }
         }
       }
-      .sort {
-        margin: 0 5px;
-        select {
+
+      .sort-container {
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+        min-width: 160px;
+        .sort {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin: 0 5px;
+          cursor: pointer;
+          .expand-icon {
+            display: flex;
+            svg {
+              color: #fd6542;
+              font-size: 2rem;
+            }
+          }
+        }
+        .selection-list {
+          top: 50px;
+          right: 0;
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          min-width: 129px;
+          list-style: none;
+          position: absolute;
           background-color: #fff;
-          height: 100%;
-          border: none;
-          &:focus-visible {
-            outline: none;
+          border: 1px solid #ced4da;
+          li {
+            cursor: pointer;
+            padding: 0.5rem;
+            &:hover {
+              background-color: #ffe7e3;
+            }
+          }
+          &.hidden {
+            display: none;
           }
         }
       }
