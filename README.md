@@ -3,8 +3,8 @@
 ## Run App
 
 ```bash
-git clone git@github.com:sustiono/flip-transction-list.git
-cd flip-transction-list
+git clone git@github.com:sustiono/flip-transaction-list.git
+cd flip-transaction-list
 cp .env.example .env
 yarn
 yarn start
